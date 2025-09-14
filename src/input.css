@@ -1,0 +1,147 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Lexend:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+@property --border-angle{
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg; 
+}
+  
+@theme {
+  --font-primary: 'Kumbh Sans', sans-serif;
+  --animate-rotate-border: border-rotate 1.7s linear infinite; 
+
+  /*darkmode*/
+
+
+
+  @keyframes border-rotate{
+    to{
+      --border-angle:360deg;
+
+    }
+  }
+
+  /*darkmode*/
+
+  --color-g1a: #000000;
+  --color-g1b: #172554 ; 
+  --color-textb: #118cd6;
+
+  --color-nav1:#93d3fa;
+}
+
+
+
+
+@layer components {
+  .card {
+    position: relative;
+    display: inline-block;
+    border-radius: 9999px; /* rounded-full */
+    /* no padding required — using pseudo-elements positioned outside instead */
+  }
+
+  .card img {
+    
+    border-radius: inherit;
+    position: relative;
+    z-index: 2; /* put image above the animated rings */
+  }
+
+  /* animated ring (sharp) */
+  .card::before,
+  /* blurred glow (soft) */
+  .card::after {
+    content: "";
+    position: absolute;
+    /* place ring slightly outside the image; change the 6px to control thickness */
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    border-radius: inherit;
+    background-image: conic-gradient(from var(--angle, 0deg),
+      #1b6de0, #449be3,#a2cff5, #ffffff, #a2cff5, #1b6de0);
+    z-index: 1;
+    animation: spin 5s linear infinite; /* correct shorthand: name duration timing infinite */
+    pointer-events: none;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .card::after {
+    filter: blur(30px);
+    opacity: 0.65;
+
+
+  }
+
+  .card:hover::before,
+  
+  .card:hover::after {
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    animation: spin 5s linear infinite; 
+    
+  }
+
+  .card:hover::after {
+    filter: blur(50px);
+    opacity: 0.90;
+
+  }
+  @keyframes spin {
+    from { --angle: 0deg; }
+    to   { --angle: 360deg; }
+  }
+}
+.ani {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px; /* same as button rounding */
+}
+
+/* Outer animated ring */
+.ani:hover:before,
+.ani:hover:after {
+  content: "";
+  position: absolute;
+  inset: -3px; /* only 3px around the button */
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(90deg, #1b6de0, #449be3, #a2cff5, #ffffff, #a2cff5, #1b6de0);
+  background-size: 600% 600%;
+  animation: gradientFlow 3s ease infinite;
+}
+
+.ani:hover:after {
+  filter: blur(10px);
+  opacity: 0.9;
+  z-index: -2;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+
+
+
+
