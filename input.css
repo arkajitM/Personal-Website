@@ -15,6 +15,7 @@ html {
 }
   
 @theme {
+  --breakpoint-new: 435px;
   --font-primary: 'Kumbh Sans', sans-serif;
   --animate-rotate-border: border-rotate 1.7s linear infinite; 
 
