@@ -109,6 +109,7 @@ html {
   position: relative;
   display: inline-block;
   border-radius: 12px; /* same as button rounding */
+  isolation: isolate; /* keeps pseudo-elements within own stacking context */
 }
 
 /* Outer animated ring */
@@ -135,6 +136,11 @@ html {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* Contact form inputs */
+.contact-input:focus {
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
 }
 
 
